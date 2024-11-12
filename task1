@@ -1,0 +1,152 @@
+Name:Shylashree B
+Company:CodeTech It Solutions
+Id:CT08DS9042
+Domain:Mern stack web development 
+Mentor:Neela Santhosh Kumar
+
+Project Name: Personal Portfolio website
+"As a [Your Profession/Student] with a passion for [Industry/Field], I'm driven to deliver innovative solutions and captivating experiences. With [Number] years of experience in [Key Skills], my expertise spans [Specific Areas]. 
+Explore my portfolio to discover my projects, achievements, and creative vision. Let's connect and bring your vision to life!"
+Frontend (React.js):
+
+jsx
+// App.js
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import Projects from './Projects';
+import Skills from './Skills';
+import Resume from './Resume';
+import Contact from './Contact';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+jsx
+// Contact.js
+import React from 'react';
+
+function Contact() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission (e.g., send email or store in database)
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <textarea placeholder="Message" />
+      <button type="submit">Send</button>
+    </form>
+  );
+}
+
+export default Contact;
+
+
+Backend (Node.js and Express.js):
+
+// server.js
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/portfolio', { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(bodyParser.json());
+
+const contactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
+});
+
+const Contact = mongoose.model('Contact', contactSchema);
+
+app.post('/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  const newContact = new Contact({ name, email, message });
+  newContact.save((err) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send('Message sent successfully!');
+    }
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+jsx
+// Contact.js
+import React from 'react';
+
+function Contact() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission (e.g., send email or store in database)
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <textarea placeholder="Message" />
+      <button type="submit">Send</button>
+    </form>
+  );
+}
+
+export default Contact;
+
+
+Backend (Node.js and Express.js):
+
+// server.js
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/portfolio', { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(bodyParser.json());
+
+const contactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
+});
+
+const Contact = mongoose.model('Contact', contactSchema);
+
+app.post('/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  const newContact = new Contact({ name, email, message });
+  newContact.save((err) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send('Message sent successfully!');
+    }
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
